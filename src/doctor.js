@@ -1,5 +1,6 @@
 export class Doctor {
-  constructor(firstName, lastName, bio, specialties, practiceName, address, phoneNumber, newPatients) {
+  constructor(doctorId, firstName, lastName, bio, specialties, practiceName, address, phoneNumber, newPatients) {
+    this.doctorId = doctorId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.bio = bio;
