@@ -21,4 +21,4 @@ export class ApiParse {
     });
     return allDoctors;
   }
-
+}
