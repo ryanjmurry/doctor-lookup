@@ -38,7 +38,7 @@ $(document).ready(function() {
         console.log(doctor.firstName);
         $('#drListGroup').append(`
         <li class="list-group-item">
-          <p><i class="fas fa-user"></i> ${doctor.lastName}, ${doctor.firstName}</p>
+          <p> ${doctor.lastName}, ${doctor.firstName}</p>
         </li>`)
       })
     }, function(error) {
