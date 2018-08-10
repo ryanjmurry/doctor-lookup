@@ -4,9 +4,10 @@ export class ApiParse {
   
   getConditions(response) {
     let body = JSON.parse(response);
+    console.log(body.data.profile);
     let allConditions = [];
     body.data.forEach(function(condition) {
-      allConditions.push(condition.uid);
+      allConditions.push(condition.name);
     });
     return allConditions;
   }
