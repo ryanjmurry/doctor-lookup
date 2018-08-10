@@ -39,7 +39,7 @@
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | enters a medical issue                      | receives a list of doctors in the Portland area that fit the search query                        |
 | enters a doctors last name                  | receives a list of doctors in the Portland area that fit that search query                       |
-| any query response that matches to a doctor | doctor first and last name, address, phone number, website, and status on accepting new patients |
+| any query response that matches to a doctor | doctor first and last name and specialties. practice address, phone number, and status on accepting new patients |
 | any query that results in an error          | error notification that states what error was                                                    |
 | any query that returns zero results         | notification that no doctors meet the criteria                                                   |
 
