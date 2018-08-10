@@ -5,6 +5,34 @@
 </head>
 <body>
   <div class="container">
+    <div class="searchArea">
+      <h2>Search By Symptom</h2>
+      <select id="conditionSelector">
+        <option></option>
+      </select>
+      <button type="button" id="findDrByCondition" class="btn btn-primary">Search</button>
+    </div>
+    <div class="searchArea">
+      <h2>Search By Doctor Last Name</h2>
+      <input type="text" id="drLastName" placeholder="Enter a last name">
+      <button type="button" id="findDrByLastName">Search</button>
+    </div>
+    <div class="results">
+      <div class="row">
+        <div class="col">
+          <h3>Doctors</h3>
+          <ul class="list-group list-group-flush" id="doctorListGroup">
+            <li></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Practice Information</h3>
+          <ul class="list-group list-group-flush" id="practiceListGroup">
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
