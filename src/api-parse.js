@@ -6,17 +6,19 @@ export class ApiParse {
     let body = JSON.parse(response);
     let allConditions = [];
     body.data.forEach(function(condition) {
-      allConditions.push(condition);
+      allConditions.push(condition.uid);
     });
     return allConditions;
   }
 
-  // getDoctor(response) {
-  //   let body = JSON.parse(response);
-  //   let allDoctors = [];
-  //   body.data.forEach(function(doctor) {
-  //     let foundDoctor = new Doctor(doctor.profile.first_name, doctor.profile.last_name, doctor)
-  //   })
-  // }
-}
+  getDoctors(response) {
+    let body = JSON.parse(response);
+    let allDoctors = [];
+    //constructor(doctorId, firstName, lastName, bio, specialties, practiceName, address, phoneNumber, newPatients)
+    body.data.forEach(function(doctor) {
+      let foundDoctor = new Doctor(doctor.uid, doctor.profile.first_name, doctor.profile.last_name, doctor.profile.bio, doctor.specialties.name, doctor.practices.name, doctor.practices.visit_address, doctor.practices.phones, doctor.practices.accepts_new_patients);
+      allDoctors.push(foundDoctor);
+    });
+    return allDoctors;
+  }
 
