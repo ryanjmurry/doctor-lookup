@@ -1,6 +1,5 @@
 export class ApiCall {
   conditionsPromise() {
-    debugger;
     return new Promise((resolve, reject) => {
       let request = new XMLHttpRequest();
       let url = `https://api.betterdoctor.com/2016-03-01/conditions?user_key=${process.env.exports.apiKey}`;
