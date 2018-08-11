@@ -31,7 +31,7 @@ $(document).ready(function() {
     drByConditionPromise.then(function(response) {
       let newParse = new ApiParse();
       let foundDoctors = newParse.getDoctors(response);
-      
+      console.log(foundDoctors);
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
         $('#drListGroup').append(`
@@ -45,7 +45,13 @@ $(document).ready(function() {
             </div>
             <div class="col">
               <p>${doctor.practiceName}</p>
+              ${doctor.phoneNumber.map(function(number){
+                if (number.type === "landline") {
+                  return `<p><i class="fas fa-phone"></i><a href="tel:${number.number}"> Call ${number.number}<a></p>`
+                }
+              }).join('')}
               <a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}">Address</a>
+              <a href="tel:" class="btn btn-sm btn-outline-success inline">Call</a>
               <a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}">Address</a>
             </div>
           </div>
