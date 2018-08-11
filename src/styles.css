@@ -1,3 +1,12 @@
 .error {
   display: none;
 }
+
+.doctor-name {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.fa-info-circle {
+  color: blue;
+}
