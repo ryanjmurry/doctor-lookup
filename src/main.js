@@ -64,14 +64,14 @@ $(document).ready(function() {
           </div>
         </div>
         */
-
+        
         //append found doctors to results page
         $('#drListGroup').append(`
         <div class="modal fade" id="${doctor.doctorId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">${doctor.firstName} ${doctor.lastName}</h5>
+                <h2 class="modal-title" id="exampleModalLongTitle">${doctor.firstName} ${doctor.lastName}</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
