@@ -21,7 +21,7 @@ $(document).ready(function() {
   $('#findDrByCondition').click(function() {
     //get condition and clear results area
     let condition = $('#conditionSelector').val();
-    $('.drListGroup').text("");
+    $('#drListGroup').text("");
 
     //make new API Call
     let newApiCall = new ApiCall();
@@ -43,15 +43,13 @@ $(document).ready(function() {
           ${doctor.specialties.map(function(specialty){
             return "<p>" + specialty.name + "</p>"
           }).join('')}
-          
+
         </li>`)
       })
-
-      foundDoctors.specialties.forEach(function(specialty) {
-
-      })
     }, function(error) {
-      $('.showError').text(`There was an error: ${error.message}`);      
+      $('.results').hide();
+      $('.error').show();
+      $('.error').text(`There was an error: ${error.message}`);      
     });
   });  
 });
