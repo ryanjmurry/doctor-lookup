@@ -31,6 +31,7 @@ $(document).ready(function() {
     drByConditionPromise.then(function(response) {
       let newParse = new ApiParse();
       let foundDoctors = newParse.getDoctors(response);
+      console.log(foundDoctors[0].specialties[0].name);
       console.log(foundDoctors);
       
       //appends doctor info to doctor list
@@ -39,7 +40,15 @@ $(document).ready(function() {
         $('#drListGroup').append(`
         <li class="list-group-item">
           <p> ${doctor.lastName}, ${doctor.firstName}</p>
+          ${doctor.specialties.map(function(specialty){
+            return "<p>" + specialty.name + "</p>"
+          }).join('')}
+          
         </li>`)
+      })
+
+      foundDoctors.specialties.forEach(function(specialty) {
+
       })
     }, function(error) {
       $('.showError').text(`There was an error: ${error.message}`);      
