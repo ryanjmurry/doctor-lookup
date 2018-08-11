@@ -8,7 +8,7 @@ export class ApiParse {
     body.data.forEach(function(condition) {
       allConditions.push(condition.name);
     });
-    return allConditions;
+    return allConditions.sort();
   }
 
   getDoctors(response) {
