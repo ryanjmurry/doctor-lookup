@@ -34,16 +34,19 @@ $(document).ready(function() {
       console.log(foundDoctors);
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
+        //to display site URL if one is retrieved from database
         let siteUrl = "";
         if (doctor.website !== "")
         {
           siteUrl += `<a href="${doctor.website}" class="info-link"><i class="fas fa-external-link-alt"></i> Go To Site</a>`;
         }
+
+        //append found doctors to results page
         $('#drListGroup').append(`
         <li class="list-group-item">
           <div class="row">
             <div class="col">
-              <h4> ${doctor.lastName}, ${doctor.firstName}</h4>
+              <h4 class="doctor-name"> ${doctor.lastName}, ${doctor.firstName}</h4><i class="fas fa-info-circle"></i>
               <h6>${doctor.practiceName}</h6>
               ${doctor.specialties.map(function(specialty){
                 return "<p>" + specialty.name + "</p>"
