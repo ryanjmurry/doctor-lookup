@@ -34,25 +34,33 @@ $(document).ready(function() {
       console.log(foundDoctors);
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
+        let siteUrl = "";
+        if (doctor.website !== "")
+        {
+          siteUrl += `<a href="${doctor.website}" class="info-link"><i class="fas fa-external-link-alt"></i> Go To Site</a>`;
+        }
         $('#drListGroup').append(`
         <li class="list-group-item">
           <div class="row">
             <div class="col">
-              <p> ${doctor.lastName}, ${doctor.firstName}</p>
+              <h4> ${doctor.lastName}, ${doctor.firstName}</h4>
+              <h6>${doctor.practiceName}</h6>
               ${doctor.specialties.map(function(specialty){
                 return "<p>" + specialty.name + "</p>"
               }).join('')}
             </div>
             <div class="col">
-              <p>${doctor.practiceName}</p>
               ${doctor.phoneNumber.map(function(number){
                 if (number.type === "landline") {
-                  return `<p><i class="fas fa-phone"></i><a href="tel:${number.number}"> Call ${number.number}<a></p>`
+                  return `<a href="tel:${number.number}" class="info-link"><i class="fas fa-phone"></i> Call ${number.number}<a>`
                 }
               }).join('')}
-              <a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}">Address</a>
-              <a href="tel:" class="btn btn-sm btn-outline-success inline">Call</a>
-              <a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}">Address</a>
+              <div>
+                <i class="fas fa-map-marked-alt"></i><a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}" class="info-link"> Address</a>
+              </div>
+              <div>
+                ${siteUrl}
+              </div>
             </div>
           </div>
         </li>`)
