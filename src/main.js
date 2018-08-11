@@ -31,19 +31,24 @@ $(document).ready(function() {
     drByConditionPromise.then(function(response) {
       let newParse = new ApiParse();
       let foundDoctors = newParse.getDoctors(response);
-      console.log(foundDoctors[0].specialties[0].name);
-      console.log(foundDoctors);
       
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
-        console.log(doctor.firstName);
         $('#drListGroup').append(`
         <li class="list-group-item">
-          <p> ${doctor.lastName}, ${doctor.firstName}</p>
-          ${doctor.specialties.map(function(specialty){
-            return "<p>" + specialty.name + "</p>"
-          }).join('')}
-
+          <div class="row">
+            <div class="col">
+              <p> ${doctor.lastName}, ${doctor.firstName}</p>
+              ${doctor.specialties.map(function(specialty){
+                return "<p>" + specialty.name + "</p>"
+              }).join('')}
+            </div>
+            <div class="col">
+              <p>${doctor.practiceName}</p>
+              <a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}">Address</a>
+              <a href="http://maps.google.com/?q=${doctor.address.street}, ${doctor.address.city}, ${doctor.address.state} ${doctor.address.zip}">Address</a>
+            </div>
+          </div>
         </li>`)
       })
     }, function(error) {
