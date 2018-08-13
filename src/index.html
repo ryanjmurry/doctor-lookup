@@ -5,25 +5,53 @@
   <title>Doctor Doctor</title>
 </head>
 <body>
-  <div class="container">
-    <div class="searchArea">
-      <h2>Search By Symptom</h2>
-      <select id="conditionSelector">
-        <option></option>
-      </select>
-      <button type="button" id="findDrByCondition" class="btn btn-primary">Search</button>
-    </div>
-    <div class="searchArea">
-      <h2>Search By Doctor Last Name</h2>
-      <input type="text" id="drLastName" placeholder="Enter a last name">
-      <button type="button" id="findDrByLastName">Search</button>
-    </div>
-    <div class="results">
-      <h2>Results</h2>
-      <ul class="list-group list-group-flush" id="drListGroup">
-      </ul>
-    </div>
-    <div class="error">
+  <div class="city-selector">
+    <h1>Select Your City</h1>
+    <select id="citySelector">
+      <option value="az-phoenix">Phoeniz, AZ</option>
+      <option value="ca-los-angeles">Los Angeles, CA</option>
+      <option value="co-denver">Denver, CO</option>
+      <option value="fl-miami">Miami, FL</option>
+      <option value="il-chicago">Chicago, IL</option>
+      <option value="ny-new-york">New York, NY</option>
+      <option value="or-portland">Portland, OR</option>
+      <option value="pa-philadelphia">Philadelphia, PA</option>
+      <option value="tx-houston">Houston, TX</option>
+      <option value="wa-seattle">Seattle, WA</option>
+    </select>
+    <button type="button" id="cityButton" class="btn btn-primary">Submit</button>
+  </div>
+  <div class="search-page">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="search-area">
+            <h2>Search By Symptom</h2>
+            <div>
+              <select id="conditionSelector">
+                <option></option>
+              </select>
+              <button type="button" id="findDrByCondition" class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="search-area">
+            <div>
+              <h2>Search By Doctor Last Name</h2>
+              <input type="text" id="drLastName" placeholder="Enter a last name">
+              <button type="button" id="findDrByLastName" class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="results">
+        <h2>Results</h2>
+        <ul class="list-group list-group-flush" id="drListGroup">
+        </ul>
+      </div>
+      <div class="error">
+      </div>
     </div>
   </div>
 </body>
