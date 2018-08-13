@@ -36,3 +36,12 @@
 .doctor-image {
   margin-right: 15px;
 }
+
+.search-area {
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.results h2 {
+  text-align: center;
+}
