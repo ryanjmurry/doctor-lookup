@@ -120,6 +120,7 @@ function modalDisplay(doctor) {
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
+                <img class="doctor-image" src="${doctor.image}" alt="doctor thumbnail">
                 <h2 class="modal-title" id="exampleModalLongTitle">${doctor.firstName} ${doctor.lastName}</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
