@@ -45,3 +45,7 @@
 .results h2 {
   text-align: center;
 }
+
+.search-page {
+  display: none;
+}
