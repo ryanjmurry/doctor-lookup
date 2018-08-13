@@ -17,7 +17,7 @@ $(document).ready(function() {
     let allConditions = newParse.getConditions(response);
     allConditions.forEach(function(condition) {
       $('#conditionSelector').append(`<option>${condition}</option>`);
-    })
+    });
   });
 
   $('#findDrByCondition').click(function() {
@@ -35,20 +35,15 @@ $(document).ready(function() {
     drByConditionPromise.then(function(response) {
       let newParse = new ApiParse();
       let foundDoctors = newParse.getDoctors(response);
-      console.log(foundDoctors.length);
+      if (foundDoctors.length === 0) {
+        noDoctors();
+      }
+
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
-        //to display site URL if one is retrieved from database
-        let siteUrl = "";
-        if (doctor.website !== "") {
-          siteUrl += `<a href="${doctor.website}" class="info-link"><i class="fas fa-external-link-alt"></i> Go To Site</a>`;
-        }
-
-        //to display icon if practice is not accepting new patients
-        let newPatient = "";
-        if (doctor.newPatients === false) {
-          newPatient += `<i class="fas fa-user-alt-slash"></i>`
-        }
+        //to display site website if one is retrieved from database and icon if practice is not accepting new patients
+        let siteUrl = conditionalWebsite(doctor);
+        let newPatient = conditionalNewPatient(doctor);
 
         //append found doctors to results page
         $('#drListGroup').append(`
@@ -74,7 +69,8 @@ $(document).ready(function() {
           <div class="row">
             <div class="col">
               <h4 class="doctor-name"> ${doctor.lastName}, ${doctor.firstName}</h4><a href="#" data-toggle="modal" data-target="#${doctor.doctorId}"><i class="fas fa-info-circle"></i></a>
-              <h6 class="practice-name">${doctor.practiceName}</h6>${newPatient}
+              <h5 class="practice-name">${doctor.practiceName}</h5>${newPatient}
+              <h6 class="specialties">Specialties</h6>
               ${doctor.specialties.map(function(specialty){
                 return "<p>" + specialty.name + "</p>"
               }).join('')}
@@ -117,21 +113,12 @@ $(document).ready(function() {
     drByLastNamePromise.then(function(response) {
       let newParse = new ApiParse();
       let foundDoctors = newParse.getDoctors(response);
-      console.log(foundDoctors);
+      
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
         //to display site URL if one is retrieved from database
-        let siteUrl = "";
-        if (doctor.website !== "") {
-          siteUrl += `<a href="${doctor.website}" class="info-link"><i class="fas fa-external-link-alt"></i> Go To Site</a>`;
-        }
-
-        //to display 
-        console.log(typeof doctor.newPatients)
-        let newPatient = "";
-        if (doctor.newPatients === true) {
-          newPatient += `<i class="fas fa-user-alt-slash"></i>`
-        }
+        let siteUrl = conditionalWebsite(doctor);
+        let newPatient = conditionalNewPatient(doctor);
 
         //append found doctors to results page
         $('#drListGroup').append(`
@@ -158,7 +145,8 @@ $(document).ready(function() {
           <div class="row">
             <div class="col">
               <h4 class="doctor-name"> ${doctor.lastName}, ${doctor.firstName}</h4><a href="#" data-toggle="modal" data-target="#${doctor.doctorId}"><i class="fas fa-info-circle"></i></a>
-              <h6 class="practice-name">${doctor.practiceName}</h6>${newPatient}
+              <h5 class="practice-name">${doctor.practiceName}</h5>${newPatient}
+              <h6 class="specialties">Specialties</h6>
               ${doctor.specialties.map(function(specialty){
                 return "<p>" + specialty.name + "</p>"
               }).join('')}
@@ -187,3 +175,26 @@ $(document).ready(function() {
   });
 
 });
+
+function noDoctors() {
+  $('#drListGroup').append(`<li class="list-group-item"><p>Unfortunately no doctors matched your search. Please try again</p></li>`);
+}
+
+function conditionalWebsite(doctor) {
+  //to display site URL if one is retrieved from database
+  let siteUrl = "";
+  if (doctor.website !== "") {
+    siteUrl += `<a href="${doctor.website}" class="info-link"><i class="fas fa-external-link-alt"></i> Go To Site</a>`;
+  }
+  return siteUrl;
+}
+
+function conditionalNewPatient(doctor) {
+  //to display icon if practice is not accepting new patients
+  let newPatient = "";
+  if (doctor.newPatients === false) {
+    newPatient += `<i class="fas fa-user-alt-slash"></i>`;
+  }
+  return newPatient;
+}
+
