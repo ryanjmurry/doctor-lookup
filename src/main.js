@@ -34,9 +34,10 @@ $(document).ready(function() {
       if (foundDoctors.length === 0) {
         noDoctors();
       }
-
+      
       //appends doctor info to doctor list
       foundDoctors.forEach(function(doctor) {
+        console.log(doctor);
         let siteUrl = conditionalWebsite(doctor);
         let newPatient = conditionalNewPatient(doctor);
 
@@ -115,7 +116,7 @@ function conditionalNewPatient(doctor) {
 }
 
 function modalDisplay(doctor) {
-  return `<div class="modal fade" id="${doctor.doctorId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  return `<div class="modal fade" id="a${doctor.doctorId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -138,7 +139,7 @@ function modalDisplay(doctor) {
 function doctorInfo(doctor, newPatient) {
   return `<div class="row">
     <div class="col">
-      <h4 class="doctor-name"> ${doctor.lastName}, ${doctor.firstName}</h4><a href="#" data-toggle="modal" data-target="#${doctor.doctorId}"><i class="fas fa-info-circle"></i></a>
+      <h4 class="doctor-name"> ${doctor.lastName}, ${doctor.firstName}</h4><a href="#" data-toggle="modal" data-target="#a${doctor.doctorId}"><i class="fas fa-info-circle"></i></a>
       <h5 class="practice-name">${doctor.practiceName}</h5>${newPatient}
       <h6 class="specialties">Specialties</h6>
       ${doctor.specialties.map(function(specialty) {
