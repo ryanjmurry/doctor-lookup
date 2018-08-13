@@ -8,81 +8,87 @@ import { ApiParse } from './api-parse.js';
 
 
 $(document).ready(function() {
+  $('#cityButton').click(function() {
+    $('.city-selector').hide();
+    $('.search-page').show();
+    let city = $('#citySelector').val();
+
   //populates conditions drop down list
-  let newApiCall = new ApiCall();
-  let conditionsPromise = newApiCall.conditionsPromise();
-
-  conditionsPromise.then(function(response) {
-    let newParse = new ApiParse();
-    let allConditions = newParse.getConditions(response);
-    allConditions.forEach(function(condition) {
-      $('#conditionSelector').append(`<option>${condition}</option>`);
-    });
-  });
-
-  $('#findDrByCondition').click(function() {
-    let condition = getUserInput();
-
-    //make new API Call
     let newApiCall = new ApiCall();
-    let drByConditionPromise = newApiCall.drByConditionPromise(condition);
+    let conditionsPromise = newApiCall.conditionsPromise();
 
-    //execute promise
-    drByConditionPromise.then(function(response) {
+    conditionsPromise.then(function(response) {
       let newParse = new ApiParse();
-      let foundDoctors = newParse.getDoctors(response);
-      if (foundDoctors.length === 0) {
-        noDoctors();
-      }
-      
-      //appends doctor info to doctor list
-      foundDoctors.forEach(function(doctor) {
-        console.log(doctor);
-        let siteUrl = conditionalWebsite(doctor);
-        let newPatient = conditionalNewPatient(doctor);
-
-        //append found doctors to results page
-        $('#drListGroup').append(`
-          ${modalDisplay(doctor)}
-          <li class="list-group-item">
-          ${doctorInfo(doctor, newPatient)}
-          ${doctorContacts(doctor, siteUrl)}
-        </li>`);
+      let allConditions = newParse.getConditions(response);
+      allConditions.forEach(function(condition) {
+        $('#conditionSelector').append(`<option>${condition}</option>`);
       });
-    }, function(error) {
-      showErrors(error);      
     });
-  });
-  
-  $('#findDrByLastName').click(function() {
-    let lastName = getUserInput();
 
-    //make new API Call
-    let newApiCall = new ApiCall();
-    let drByLastNamePromise = newApiCall.drByLastNamePromimse(lastName);
+    $('#findDrByCondition').click(function() {
+      let condition = getUserInput();
 
-    //execute promise
-    drByLastNamePromise.then(function(response) {
-      let newParse = new ApiParse();
-      let foundDoctors = newParse.getDoctors(response);
-      
-      //appends doctor info to doctor list
-      foundDoctors.forEach(function(doctor) {
-        let siteUrl = conditionalWebsite(doctor);
-        let newPatient = conditionalNewPatient(doctor);
+      //make new API Call
+      let newApiCall = new ApiCall();
+      let drByConditionPromise = newApiCall.drByConditionPromise(condition, city);
 
-        //append found doctors to results page
-        $('#drListGroup').append(`
-          ${modalDisplay(doctor)}
-          <li class="list-group-item">
-          ${doctorInfo(doctor, newPatient)}
-          ${doctorContacts(doctor, siteUrl)}
-        </li>`);
+      //execute promise
+      drByConditionPromise.then(function(response) {
+        let newParse = new ApiParse();
+        let foundDoctors = newParse.getDoctors(response);
+        if (foundDoctors.length === 0) {
+          noDoctors();
+        }
+        
+        //appends doctor info to doctor list
+        foundDoctors.forEach(function(doctor) {
+          console.log(doctor);
+          let siteUrl = conditionalWebsite(doctor);
+          let newPatient = conditionalNewPatient(doctor);
+
+          //append found doctors to results page
+          $('#drListGroup').append(`
+            ${modalDisplay(doctor)}
+            <li class="list-group-item">
+            ${doctorInfo(doctor, newPatient)}
+            ${doctorContacts(doctor, siteUrl)}
+          </li>`);
+        });
+      }, function(error) {
+        showErrors(error);      
       });
-    }, function(error) {
-      showErrors(error);      
     });
-  });
+    
+    $('#findDrByLastName').click(function() {
+      let lastName = getUserInput();
+
+      //make new API Call
+      let newApiCall = new ApiCall();
+      let drByLastNamePromise = newApiCall.drByLastNamePromimse(lastName);
+
+      //execute promise
+      drByLastNamePromise.then(function(response) {
+        let newParse = new ApiParse();
+        let foundDoctors = newParse.getDoctors(response);
+        
+        //appends doctor info to doctor list
+        foundDoctors.forEach(function(doctor) {
+          let siteUrl = conditionalWebsite(doctor);
+          let newPatient = conditionalNewPatient(doctor);
+
+          //append found doctors to results page
+          $('#drListGroup').append(`
+            ${modalDisplay(doctor)}
+            <li class="list-group-item">
+            ${doctorInfo(doctor, newPatient)}
+            ${doctorContacts(doctor, siteUrl)}
+          </li>`);
+        });
+      }, function(error) {
+        showErrors(error);      
+      });
+    });
+  })
 });
 
 function getUserInput() {
