@@ -23,3 +23,12 @@
 .fa-user-alt-slash {
   display: inline-block;
 }
+
+.specialties {
+  text-decoration: underline;
+  font-size: 15px;
+}
+
+.practice-name {
+  font-size: 17px;
+}
