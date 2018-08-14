@@ -26,7 +26,7 @@ $(document).ready(function() {
     });
 
     $('#findDrByCondition').click(function() {
-      let condition = getUserInputLastName();
+      let condition = getUserInputCondition();
 
       //make new API Call
       let newApiCall = new ApiCall();
