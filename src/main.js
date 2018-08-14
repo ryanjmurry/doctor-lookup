@@ -26,7 +26,7 @@ $(document).ready(function() {
     });
 
     $('#findDrByCondition').click(function() {
-      let condition = getUserInput();
+      let condition = getUserInputLastName();
 
       //make new API Call
       let newApiCall = new ApiCall();
@@ -60,16 +60,19 @@ $(document).ready(function() {
     });
     
     $('#findDrByLastName').click(function() {
-      let lastName = getUserInput();
+      let lastName = getUserInputLastName();
 
       //make new API Call
       let newApiCall = new ApiCall();
-      let drByLastNamePromise = newApiCall.drByLastNamePromimse(lastName);
+      let drByLastNamePromise = newApiCall.drByLastNamePromimse(lastName, city);
 
       //execute promise
       drByLastNamePromise.then(function(response) {
         let newParse = new ApiParse();
         let foundDoctors = newParse.getDoctors(response);
+        if (foundDoctors.length === 0) {
+          noDoctors();
+        }
         
         //appends doctor info to doctor list
         foundDoctors.forEach(function(doctor) {
@@ -91,10 +94,18 @@ $(document).ready(function() {
   })
 });
 
-function getUserInput() {
+function getUserInputCondition() {
   $('.results').show();
   //get condition and clear results area
   let input = $('#conditionSelector').val();
+  $('#drListGroup').text("");
+  return input;
+}
+
+function getUserInputLastName() {
+  $('.results').show();
+  //get condition and clear results area
+  let input = $('#drLastName').val();
   $('#drListGroup').text("");
   return input;
 }
