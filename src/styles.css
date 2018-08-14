@@ -49,3 +49,11 @@
 .search-page {
   display: none;
 }
+
+.city-selector {
+  position: fixed;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
